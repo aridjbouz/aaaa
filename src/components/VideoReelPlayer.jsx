@@ -15,53 +15,52 @@ import {
   Calendar
 } from 'lucide-react';
 import studioImages from '../assets/images';
-import { useLanguage } from '../context/LanguageContext';
 
 export default function VideoReelPlayer({ onBookSession }) {
   const [activeReelIndex, setActiveReelIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isAudioMuted, setIsAudioMuted] = useState(true);
   const [progress, setProgress] = useState(28);
-  const { t } = useLanguage();
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const reels = [
     {
       id: 'newborn-slumber',
-      title: t('vid_reel1_title'),
-      category: t('vid_reel1_cat'),
+      title: 'Newborn Slumber Symphony (4K Cinema)',
+      category: 'Newborn Film (5-12 Days)',
       duration: '01:34',
       image: studioImages.heroBaby,
-      description: t('vid_reel1_desc'),
+      description: 'Slow-motion 60fps cinematic film capturing the peaceful dreams, tiny yawns, and rhythmic breathing of baby Liam on his 8th day of life.',
       gear: 'Sony FX3 Cinema • 50mm f/1.2 GM • Golden Honey LUT',
       stats: '4K ProRes 422 HQ • Master Sound Design'
     },
     {
       id: 'sitter-giggles',
-      title: t('vid_reel2_title'),
-      category: t('vid_reel2_cat'),
+      title: 'The Little Explorer - Sitter Milestone',
+      category: 'Milestone Film (6-9 Months)',
       duration: '01:15',
       image: studioImages.sitterMilestone,
-      description: t('vid_reel2_desc'),
+      description: 'Joyful cinematic highlight capturing sparkling eyes, adorable belly laughs, and curious first grasps of wooden handcrafted toys.',
       gear: 'Sony A7S III • 35mm f/1.4 GM • Warm Ivory LUT',
       stats: '4K 120fps Slow-Mo • Certified Baby-Safe Studio'
     },
     {
       id: 'cake-smash-grand',
-      title: t('vid_reel3_title'),
-      category: t('vid_reel3_cat'),
+      title: 'First Birthday Cake Smash Jubilee',
+      category: '1st Birthday Film (12 Months)',
       duration: '02:10',
       image: studioImages.cakeSmash,
-      description: t('vid_reel3_desc'),
+      description: 'An explosion of organic cream cake, giggles, pastel confetti, and happy little foot stomps captured in ultra-sharp 4K HDR.',
       gear: 'Sony FX3 Cinema • 24-70mm f/2.8 GM II • Pastel Luxe LUT',
       stats: 'Full Milestone Featurette + 60s Social Reel'
     },
     {
       id: 'family-bond-cinema',
-      title: t('vid_reel4_title'),
-      category: t('vid_reel4_cat'),
+      title: 'The Miracle of Touch - Family Story',
+      category: 'Family & Newborn Cinema',
       duration: '02:45',
       image: studioImages.familyBaby,
-      description: t('vid_reel4_desc'),
+      description: 'Intimate emotional documentary film capturing the unrepeatable bond between parents and their newborn miracle in soft backlight.',
       gear: 'Sony FX3 • Anamorphic 50mm • Timeless Grain Grade',
       stats: 'Heirloom 4K Master Video & Archival Audio'
     }
@@ -90,10 +89,12 @@ export default function VideoReelPlayer({ onBookSession }) {
         <div className="section-header">
           <div className="badge badge-gold">
             <Film size={14} />
-            <span>{t('vid_badge')}</span>
+            <span>Cinematic Baby Videography</span>
           </div>
-          <h2>{t('vid_title')}</h2>
-          <p>{t('vid_sub')}</p>
+          <h2>Living Memories in 4K Cinema Motion</h2>
+          <p>
+            Photographs freeze a moment, but our signature 4K baby films capture the breath, the gentle sighs, and the unrepeatable first days of your baby’s journey.
+          </p>
         </div>
 
         {/* Video Player Main Arena */}
@@ -102,7 +103,7 @@ export default function VideoReelPlayer({ onBookSession }) {
           <div className="player-top-bar">
             <div className="player-status">
               <span className="live-rec-dot" />
-              <span className="rec-text">{t('vid_rec_label')}</span>
+              <span className="rec-text">4K CINEMA MASTER REEL</span>
             </div>
             <div className="player-badge-group">
               <span className="badge badge-dark">60 FPS UHD</span>
@@ -156,7 +157,7 @@ export default function VideoReelPlayer({ onBookSession }) {
                   />
                 ))}
               </div>
-              <span className="audio-label">{isAudioMuted ? t('vid_ambience_muted') : t('vid_ambience_on')}</span>
+              <span className="audio-label">{isAudioMuted ? 'Ambience Muted' : 'Lullaby Sound Master'}</span>
             </div>
 
             {/* Video Lower Overlay Information */}
@@ -178,7 +179,7 @@ export default function VideoReelPlayer({ onBookSession }) {
                   className="btn btn-primary"
                 >
                   <Calendar size={16} />
-                  <span>{t('vid_book_style')}</span>
+                  <span>Book This Video Style</span>
                 </button>
               </div>
             </div>
@@ -233,32 +234,32 @@ export default function VideoReelPlayer({ onBookSession }) {
             <div className="feature-icon-circle">
               <Sparkles size={20} />
             </div>
-            <h4>{t('vid_feat1_title')}</h4>
-            <p>{t('vid_feat1_p')}</p>
+            <h4>True 4K 60fps Cinema</h4>
+            <p>Shot with cinema-grade sensors capturing fine eyelash flutter and subtle smiles in ultra-high resolution.</p>
           </div>
 
           <div className="feature-item-card glass-card">
             <div className="feature-icon-circle">
               <Sliders size={20} />
             </div>
-            <h4>{t('vid_feat2_title')}</h4>
-            <p>{t('vid_feat2_p')}</p>
+            <h4>Custom Color Grading</h4>
+            <p>Every clip is hand-graded in our signature soft warm golden tones, ensuring skin tones look pristine and soft.</p>
           </div>
 
           <div className="feature-item-card glass-card">
             <div className="feature-icon-circle">
               <Film size={20} />
             </div>
-            <h4>{t('vid_feat3_title')}</h4>
-            <p>{t('vid_feat3_p')}</p>
+            <h4>Social Reel + Full Film</h4>
+            <p>Receive both an Instagram/TikTok ready 9:16 vertical teaser and a 16:9 full archival family documentary.</p>
           </div>
 
           <div className="feature-item-card glass-card">
             <div className="feature-icon-circle">
               <CheckCircle2 size={20} />
             </div>
-            <h4>{t('vid_feat4_title')}</h4>
-            <p>{t('vid_feat4_p')}</p>
+            <h4>Baby-Safe Lighting</h4>
+            <p>100% continuous diffused warm softboxes with zero harsh strobes or sudden flashes for delicate baby eyes.</p>
           </div>
         </div>
       </div>

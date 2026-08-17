@@ -8,39 +8,37 @@ import {
   Sparkles,
   Film
 } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
 
 export default function TestimonialSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { t } = useLanguage();
 
   const testimonials = [
     {
       id: 1,
-      name: t('test_t1_name'),
-      baby: t('test_t1_baby'),
+      name: 'Elena & Marcus Vance',
+      baby: 'Baby Theo (Day 8 Newborn)',
       rating: 5,
-      story: t('test_t1_story'),
-      package: t('test_t1_pkg'),
-      tag: t('test_t1_tag')
+      story: 'When we received our 4K video reel, my husband and I both burst into tears of pure happiness. The way Studio Mission Verse captured our baby’s sleepy yawns and tiny fingers with such soft cinematic light is simply unmatched. The studio was so warm, calm, and spotlessly clean.',
+      package: 'The Cinematic Milestone Collection',
+      tag: 'Verified Newborn Parent'
     },
     {
       id: 2,
-      name: t('test_t2_name'),
-      baby: t('test_t2_baby'),
+      name: 'Sophia & David Chen',
+      baby: 'Baby Mia (1st Birthday Cake Smash)',
       rating: 5,
-      story: t('test_t2_story'),
-      package: t('test_t2_pkg'),
-      tag: t('test_t2_tag')
+      story: 'We were nervous Mia might cry during the cake smash, but the team had an angelic gentleness with her. The video recap looked like an authentic high-end movie! Our entire family in London and Tokyo watched the 4K link with pure awe. Worth every single penny.',
+      package: 'The Royal Heirloom Experience',
+      tag: '1st Birthday Milestone'
     },
     {
       id: 3,
-      name: t('test_t3_name'),
-      baby: t('test_t3_baby'),
+      name: 'Amara & Julian Brooks',
+      baby: 'Baby Noah (7-Month Sitter)',
       rating: 5,
-      story: t('test_t3_story'),
-      package: t('test_t3_pkg'),
-      tag: t('test_t3_tag')
+      story: 'Safety was our number one concern as first-time parents. From the temperature-controlled nursery room to the UV sanitized props, Studio Mission Verse treated Noah like royalty. The photos and video reels are now our family’s greatest treasure.',
+      package: 'The Cinematic Milestone Collection',
+      tag: 'Milestone Sitter Session'
     }
   ];
 
@@ -60,10 +58,10 @@ export default function TestimonialSlider() {
         <div className="section-header">
           <div className="badge badge-blue">
             <Heart size={14} />
-            <span>{t('test_badge')}</span>
+            <span>Parent Love & Praise</span>
           </div>
-          <h2>{t('test_title')}</h2>
-          <p>{t('test_sub')}</p>
+          <h2>Cherished by Over 800+ Happy Families</h2>
+          <p>Read why parents trust Studio Mission Verse to film and photograph their baby's once-in-a-lifetime beginnings.</p>
         </div>
 
         <div className="testimonial-card-wrap glass-card">

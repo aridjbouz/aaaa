@@ -1,185 +1,155 @@
 import React from 'react';
-import { 
-  Camera, 
-  MapPin, 
-  Phone,
-  Heart
-} from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { Phone, MessageCircle } from 'lucide-react';
 
-export default function Footer({ onNavigate }) {
-  const { t } = useLanguage();
+export default function Footer() {
+  const instaUrl = "https://www.instagram.com/mission_verse?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==";
+  const phone = "0564589749";
+  const whatsappUrl = "https://wa.me/213564589749";
 
   return (
-    <footer className="footer-container">
-      <div className="container footer-content">
-        
-        {/* Brand & Socials Section */}
-        <div className="footer-brand-col">
-          <div className="footer-logo">
-            <Camera size={28} className="logo-icon text-gold" />
-            <span className="logo-text">Mission Verse</span>
-          </div>
-          <p className="footer-tagline">{t('footer_subtitle')}</p>
-          <p className="footer-year">2026</p>
-          
-          <div className="footer-social-links">
-            <a 
-              href="https://www.instagram.com/mission_verse?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-btn"
-              aria-label="Instagram"
-            >
-              <Heart size={20} />
-            </a>
+    <footer className="footer-section">
+      <div className="container footer-clean-container">
+        {/* Brand & Dev Studio info */}
+        <div className="footer-brand-box">
+          <div className="brand-logo">
+            <div className="logo-badge">
+              <img src="/logo.jpg" alt="Mission Verse" className="logo-img-circle" />
+            </div>
+            <div className="logo-text-group">
+              <span className="brand-title">MISSION VERSE</span>
+              <span className="brand-subtitle">Boîte de développement et communication</span>
+            </div>
           </div>
         </div>
 
-        {/* Contact Info Section */}
-        <div className="footer-contact-col">
-          <h4 className="footer-heading">{t('nav_contact')}</h4>
-          <ul className="footer-info-list">
-            <li>
-              <MapPin size={18} className="info-icon" />
-              <span>{t('contact_address_value')}</span>
-            </li>
-            <li>
-              <Phone size={18} className="info-icon" />
-              <span>{t('footer_tel')}: <a href="tel:0564589749">0564589749</a></span>
-            </li>
-          </ul>
+        {/* Contact & Social Links */}
+        <div className="footer-contacts-row">
+          <a href={instaUrl} target="_blank" rel="noopener noreferrer" className="footer-contact-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E1306C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <span>@mission_verse</span>
+          </a>
+
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="footer-contact-pill">
+            <MessageCircle size={18} color="#25D366" />
+            <span>WhatsApp: {phone}</span>
+          </a>
+
+          <a href={`tel:${phone}`} className="footer-contact-pill">
+            <Phone size={18} color="#1E6FFF" />
+            <span>Tél: {phone}</span>
+          </a>
         </div>
 
-      </div>
-
-      <div className="footer-bottom-bar">
-        <p>{t('footer_copyright')}</p>
+        {/* Copyright */}
+        <div className="footer-copyright">
+          <p>© 2026 Mission Verse. Tous droits réservés.</p>
+        </div>
       </div>
 
       <style>{`
-        .footer-container {
-          background: rgba(13, 31, 60, 0.6);
+        .footer-section {
+          background: rgba(5, 12, 24, 0.35);
           backdrop-filter: blur(12px);
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          -webkit-backdrop-filter: blur(12px);
           color: rgba(255, 255, 255, 0.85);
-          padding-top: 60px;
+          padding: 60px 0 40px 0;
+          border-top: 1px solid rgba(255, 255, 255, 0.15);
+          width: 100%;
         }
 
-        .footer-content {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 40px;
-          margin-bottom: 40px;
+        .footer-clean-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 28px;
+          text-align: center;
         }
 
-        /* Brand Column */
-        .footer-logo {
+        .brand-logo {
           display: flex;
           align-items: center;
-          gap: 12px;
-          margin-bottom: 16px;
+          gap: 14px;
         }
 
-        .logo-text {
+        .logo-badge {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 2px solid rgba(30, 111, 255, 0.4);
+          flex-shrink: 0;
+          box-shadow: 0 4px 14px rgba(30, 111, 255, 0.2);
+        }
+
+        .logo-img-circle {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .logo-text-group {
+          display: flex;
+          flex-direction: column;
+          text-align: left;
+        }
+
+        .brand-title {
           font-family: var(--font-serif);
-          font-size: 1.8rem;
+          font-size: 1.35rem;
+          font-weight: 700;
           color: #FFFFFF;
+          letter-spacing: 0.05em;
+          line-height: 1.2;
         }
 
-        .text-gold {
-          color: var(--accent-cyan);
-        }
-
-        .footer-tagline {
-          font-size: 1rem;
-          margin-bottom: 8px;
-          color: rgba(255, 255, 255, 0.8);
-        }
-
-        .footer-year {
+        .brand-subtitle {
+          font-size: 0.8rem;
           font-weight: 600;
           color: var(--accent-cyan);
-          margin-bottom: 24px;
+          letter-spacing: 0.04em;
         }
 
-        .footer-social-links {
-          display: flex;
-          gap: 16px;
-        }
-
-        .social-btn {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.05);
+        .footer-contacts-row {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #FFFFFF;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .social-btn:hover {
-          background: var(--accent-cyan);
-          border-color: var(--accent-cyan);
-          transform: translateY(-3px);
-        }
-
-        /* Contact Column */
-        .footer-heading {
-          font-size: 1.2rem;
-          color: #FFFFFF;
-          margin-bottom: 20px;
-          font-weight: 600;
-        }
-
-        .footer-info-list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          flex-direction: column;
           gap: 16px;
+          flex-wrap: wrap;
         }
 
-        .footer-info-list li {
+        .footer-contact-pill {
           display: flex;
-          align-items: flex-start;
-          gap: 12px;
-          line-height: 1.5;
-        }
-
-        .info-icon {
-          color: var(--accent-cyan);
-          flex-shrink: 0;
-          margin-top: 2px;
-        }
-
-        .footer-info-list a {
-          color: var(--accent-cyan);
+          align-items: center;
+          gap: 10px;
+          padding: 11px 24px;
+          background: rgba(255, 255, 255, 0.12);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 9999px;
+          color: #FFFFFF;
+          font-size: 0.92rem;
+          font-weight: 600;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
           text-decoration: none;
-          transition: color 0.3s ease;
         }
 
-        .footer-info-list a:hover {
+        .footer-contact-pill:hover {
+          transform: translateY(-2px);
+          background: rgba(255, 255, 255, 0.25);
+          border-color: #FFFFFF;
+          box-shadow: 0 6px 20px rgba(30, 111, 255, 0.35);
           color: #FFFFFF;
         }
 
-        /* Bottom Bar */
-        .footer-bottom-bar {
-          background: rgba(5, 12, 24, 0.9);
-          padding: 20px;
-          text-align: center;
-          font-size: 0.9rem;
-          color: rgba(255, 255, 255, 0.6);
-        }
-
-        @media (max-width: 768px) {
-          .footer-content {
-            grid-template-columns: 1fr;
-          }
+        .footer-copyright p {
+          font-size: 0.85rem;
+          color: rgba(255, 255, 255, 0.7);
         }
       `}</style>
     </footer>
