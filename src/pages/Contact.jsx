@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import { MapPin, Phone, MessageCircle, Clock } from 'lucide-react';
 import { useGSAP3D } from '../hooks/useGSAP3D';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Contact() {
   const pageRef = useRef(null);
   useGSAP3D(pageRef);
+  const { t } = useLanguage();
 
   return (
     <div className="contact-page-root" ref={pageRef}>
@@ -25,47 +27,60 @@ export default function Contact() {
       <div className="contact-content-layer container">
         {/* Header */}
         <div className="contact-header" data-gsap="fade-up">
-          <h1 className="contact-title">Contact</h1>
-          <p className="contact-tagline">Gros plan sur vos souvenirs et bien plus encore</p>
+          <h1 className="contact-title">{t('contact_title')}</h1>
+          <p className="contact-tagline">{t('contact_tagline')}</p>
         </div>
 
         {/* Info Cards Grid */}
-        <div className="contact-cards-grid" data-gsap="stagger">
-          {/* Address */}
-          <div className="contact-glass-item">
+        <div className="contact-cards-grid" data-gsap="stagger-cards">
+          
+          {/* Address Card */}
+          <div className="contact-card glass-card">
             <div className="contact-icon-bubble">
-              <MapPin size={26} />
+              <MapPin size={24} className="text-gold" />
             </div>
-            <h3>Adresse</h3>
-            <p>Mall Bouwaher, Route de Biskra<br/>Wilaya de Batna</p>
+            <h3>{t('contact_address_label')}</h3>
+            <p style={{ whiteSpace: 'pre-line' }}>{t('contact_address_value')}</p>
           </div>
 
-          {/* Phone */}
-          <div className="contact-glass-item">
+          {/* Phone Card */}
+          <div className="contact-card glass-card">
             <div className="contact-icon-bubble">
-              <Phone size={26} />
+              <Phone size={24} className="text-gold" />
             </div>
-            <h3>Téléphone</h3>
-            <p><a href="tel:0564589749">0564589749</a></p>
+            <h3>{t('contact_phone_label')}</h3>
+            <p>
+              <a href="tel:0564589749" className="contact-link">0564589749</a>
+            </p>
           </div>
 
-          {/* WhatsApp */}
-          <div className="contact-glass-item">
+          {/* WhatsApp Card */}
+          <div className="contact-card glass-card">
             <div className="contact-icon-bubble">
-              <MessageCircle size={26} />
+              <MessageCircle size={24} className="text-gold" />
             </div>
-            <h3>WhatsApp</h3>
-            <p><a href="https://wa.me/213564589749" target="_blank" rel="noreferrer">0564589749</a></p>
+            <h3>{t('contact_whatsapp_label')}</h3>
+            <p>
+              <a 
+                href="https://wa.me/213564589749" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="contact-link"
+              >
+                +213 56 45 89 74 9
+              </a>
+            </p>
           </div>
 
-          {/* Availability */}
-          <div className="contact-glass-item">
+          {/* Availability Card */}
+          <div className="contact-card glass-card">
             <div className="contact-icon-bubble">
-              <Clock size={26} />
+              <Clock size={24} className="text-gold" />
             </div>
-            <h3>Disponibilité</h3>
-            <p>Nous travaillons sur rendez-vous</p>
+            <h3>{t('contact_availability_label')}</h3>
+            <p>{t('contact_availability_value')}</p>
           </div>
+
         </div>
       </div>
 
@@ -73,15 +88,16 @@ export default function Contact() {
         .contact-page-root {
           position: relative;
           min-height: 100vh;
-          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           overflow: hidden;
-          background: #050C18;
-          color: #FFFFFF;
+          background: #000;
         }
 
-        /* ── Video Background (same pattern as About) ── */
+        /* ── Video Background ── */
         .contact-video-bg-wrap {
-          position: fixed;
+          position: absolute;
           inset: 0;
           z-index: 0;
         }
@@ -96,112 +112,120 @@ export default function Contact() {
         .contact-video-overlay {
           position: absolute;
           inset: 0;
-          background: rgba(5, 12, 24, 0.55);
+          /* Dark gradient to ensure text readability */
+          background: linear-gradient(
+            135deg,
+            rgba(5, 12, 24, 0.85) 0%,
+            rgba(5, 12, 24, 0.65) 50%,
+            rgba(5, 12, 24, 0.45) 100%
+          );
           backdrop-filter: blur(4px);
-          -webkit-backdrop-filter: blur(4px);
-          z-index: 1;
         }
 
         /* ── Content Layer ── */
         .contact-content-layer {
           position: relative;
           z-index: 2;
-          padding: 140px 20px 100px 20px;
+          padding: 120px 20px 80px 20px;
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 60px;
-          text-align: center;
         }
 
         /* ── Header ── */
         .contact-header {
-          max-width: 700px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+          text-align: center;
+          color: #FFFFFF;
         }
 
         .contact-title {
           font-family: var(--font-serif);
-          font-size: clamp(3rem, 6vw, 5rem);
-          line-height: 1.1;
-          color: #FFFFFF;
+          font-size: clamp(3rem, 5vw, 4.5rem);
           margin-bottom: 16px;
-          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+          letter-spacing: -0.02em;
+          text-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         .contact-tagline {
-          font-size: 1.25rem;
-          line-height: 1.6;
+          font-size: 1.2rem;
           color: rgba(255, 255, 255, 0.85);
-          font-style: italic;
-          letter-spacing: 0.02em;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
         /* ── Cards Grid ── */
         .contact-cards-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 28px;
+          gap: 24px;
           width: 100%;
-          max-width: 1100px;
+          max-width: 1200px;
         }
 
-        .contact-glass-item {
-          background: rgba(13, 31, 60, 0.45);
+        .contact-card {
+          background: rgba(13, 31, 60, 0.6);
           backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
           border: 1px solid rgba(255, 255, 255, 0.15);
           border-radius: 24px;
-          padding: 36px 24px;
+          padding: 40px 24px;
           text-align: center;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 14px;
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-          transition: transform 0.3s ease, border-color 0.3s ease;
+          gap: 16px;
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        .contact-glass-item:hover {
-          transform: translateY(-6px);
-          border-color: var(--primary-blue, #1E6FFF);
+        .contact-card:hover {
+          transform: translateY(-10px);
+          border-color: var(--accent-cyan);
+          background: rgba(13, 31, 60, 0.8);
+          box-shadow: 0 25px 50px rgba(0, 194, 255, 0.15);
         }
 
         .contact-icon-bubble {
-          width: 56px;
-          height: 56px;
+          width: 64px;
+          height: 64px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(30, 111, 255, 0.15);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--accent-cyan, #5CE1E6);
+          margin-bottom: 8px;
+          border: 1px solid rgba(30, 111, 255, 0.3);
         }
 
-        .contact-glass-item h3 {
+        .text-gold {
+          color: var(--accent-cyan);
+        }
+
+        .contact-card h3 {
+          color: #FFFFFF;
           font-size: 1.2rem;
-          color: #FFFFFF;
-          margin: 0;
+          font-weight: 600;
+          letter-spacing: 0.05em;
         }
 
-        .contact-glass-item p {
-          font-size: 0.95rem;
-          line-height: 1.5;
+        .contact-card p {
           color: rgba(255, 255, 255, 0.8);
+          font-size: 1rem;
+          line-height: 1.6;
           margin: 0;
         }
 
-        .contact-glass-item a {
-          color: rgba(255, 255, 255, 0.85);
+        .contact-link {
+          color: var(--accent-cyan);
           text-decoration: none;
-          transition: color 0.2s ease;
+          font-weight: 500;
+          transition: color 0.3s ease;
         }
 
-        .contact-glass-item a:hover {
+        .contact-link:hover {
           color: #FFFFFF;
-          text-decoration: underline;
+          text-shadow: 0 0 10px rgba(0, 194, 255, 0.5);
         }
 
         /* ── Responsive ── */
@@ -211,13 +235,12 @@ export default function Contact() {
           }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
           .contact-cards-grid {
             grid-template-columns: 1fr;
           }
-
           .contact-content-layer {
-            padding: 120px 16px 80px 16px;
+            padding: 100px 20px 60px 20px;
           }
         }
       `}</style>

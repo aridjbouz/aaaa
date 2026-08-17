@@ -10,6 +10,7 @@ import {
   Layers,
   Award
 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function PackageCalculator({ onSelectPackage }) {
   const [selectedTier, setSelectedTier] = useState('cinematic');
@@ -19,75 +20,73 @@ export default function PackageCalculator({ onSelectPackage }) {
     rush: false,
     rawFootage: false
   });
+  const { t } = useLanguage();
 
   const packages = [
     {
       id: 'miracle',
-      name: 'The Little Miracle',
-      subtitle: 'Essential Fine-Art Photo & Reel',
+      name: t('pkg_miracle_name'),
+      subtitle: t('pkg_miracle_sub'),
       basePrice: 450,
-      badge: 'Starter Choice',
+      badge: t('pkg_miracle_badge'),
       badgeClass: 'badge-sage',
-      duration: '2 Hours Session',
-      photos: '20 High-Res Edited Photos',
-      video: '60-Sec 4K Social Video Reel',
-      setups: '3 Couture Baby Setups',
+      duration: t('pkg_miracle_duration'),
+      photos: t('pkg_miracle_photos'),
+      video: t('pkg_miracle_video'),
       features: [
-        'Full access to sanitized baby wardrobe & props',
-        '20 High-resolution retouched digital images',
-        '60-second 4K cinematic Instagram/TikTok reel',
-        'Gentle temperature-controlled studio environment',
-        'Private online download gallery with printing rights'
+        t('pkg_miracle_f1'),
+        t('pkg_miracle_f2'),
+        t('pkg_miracle_f3'),
+        t('pkg_miracle_f4'),
+        t('pkg_miracle_f5')
       ]
     },
     {
       id: 'cinematic',
-      name: 'Cinematic Milestone',
-      subtitle: 'Our Signature Photo & 4K Film Duo',
+      name: t('pkg_cinematic_name'),
+      subtitle: t('pkg_cinematic_sub'),
       basePrice: 750,
-      badge: '★ Most Popular & Loved',
+      badge: t('pkg_cinematic_badge'),
       badgeClass: 'badge-gold',
       isPopular: true,
-      duration: '3.5 Hours Relaxed Session',
-      photos: '40 High-Res Edited Photos',
-      video: '4K Cinematic Film (2-3 min) + 60s Reel',
-      setups: '5 Styled Baby & Family Setups',
+      duration: t('pkg_cinematic_duration'),
+      photos: t('pkg_cinematic_photos'),
+      video: t('pkg_cinematic_video'),
       features: [
-        'Signature 4K Master Cinema Film (with custom score)',
-        '40 Masterfully color-graded heirloom portraits',
-        'Parents & sibling portraits included at no extra fee',
-        '5 Curated baby setups (wooden props, clouds, nests)',
-        'Sneak peek 4K reel delivered within 48 hours',
-        'High-resolution print release + mobile app gallery'
+        t('pkg_cinematic_f1'),
+        t('pkg_cinematic_f2'),
+        t('pkg_cinematic_f3'),
+        t('pkg_cinematic_f4'),
+        t('pkg_cinematic_f5'),
+        t('pkg_cinematic_f6')
       ]
     },
     {
       id: 'royal',
-      name: 'The Royal Heirloom',
-      subtitle: 'Complete Archival Cinema & Keepsake',
+      name: t('pkg_royal_name'),
+      subtitle: t('pkg_royal_sub'),
       basePrice: 1250,
-      badge: 'Ultimate Luxury',
+      badge: t('pkg_royal_badge'),
       badgeClass: 'badge-rose',
-      duration: 'Unlimited Studio Time',
-      photos: '60+ Fine-Art Heirloom Photos',
-      video: 'Full 5-Min 4K Documentary + 2 Reels',
-      setups: 'Unlimited Setups & Outfit Changes',
+      duration: t('pkg_royal_duration'),
+      photos: t('pkg_royal_photos'),
+      video: t('pkg_royal_video'),
       features: [
-        '5-Minute 4K Mini-Documentary of your baby’s story',
-        'Bespoke 10x10 Handcrafted Italian Linen Photo Album',
-        'All 60+ fully retouched archival quality images',
-        'Full family, siblings, and grandparents coverage',
-        'Expedited 48-hour delivery on all video deliverables',
-        'Custom engraved wooden USB keepsake box & print set'
+        t('pkg_royal_f1'),
+        t('pkg_royal_f2'),
+        t('pkg_royal_f3'),
+        t('pkg_royal_f4'),
+        t('pkg_royal_f5'),
+        t('pkg_royal_f6')
       ]
     }
   ];
 
   const addonsList = [
-    { id: 'album', name: 'Handcrafted Velvet Linen Photo Album (10x10)', price: 180, icon: Gift },
-    { id: 'sibling', name: 'Grandparents & Sibling Milestone Film Segment', price: 120, icon: Film },
-    { id: 'rush', name: 'Expedited 48-Hour Delivery Guarantee', price: 95, icon: Clock },
-    { id: 'rawFootage', name: 'All Uncut Raw 4K Video Clips on SSD', price: 150, icon: Layers },
+    { id: 'album', name: t('pkg_addon_album'), price: 180, icon: Gift },
+    { id: 'sibling', name: t('pkg_addon_sibling'), price: 120, icon: Film },
+    { id: 'rush', name: t('pkg_addon_rush'), price: 95, icon: Clock },
+    { id: 'rawFootage', name: t('pkg_addon_raw'), price: 150, icon: Layers },
   ];
 
   const toggleAddon = (id) => {
@@ -109,12 +108,10 @@ export default function PackageCalculator({ onSelectPackage }) {
         <div className="section-header">
           <div className="badge badge-gold">
             <Award size={14} />
-            <span>Curated Session Collections</span>
+            <span>{t('pkg_badge')}</span>
           </div>
-          <h2>Invest in Memories That Never Fade</h2>
-          <p>
-            Transparent, luxury packages tailored for newborn and milestone sessions with cinema-grade video storytelling.
-          </p>
+          <h2>{t('pkg_title')}</h2>
+          <p>{t('pkg_sub')}</p>
         </div>
 
         {/* 3 Package Cards */}
@@ -139,7 +136,7 @@ export default function PackageCalculator({ onSelectPackage }) {
                   <div className="pkg-price-row">
                     <span className="price-curr">$</span>
                     <span className="price-num">{pkg.basePrice}</span>
-                    <span className="price-period">/ session</span>
+                    <span className="price-period">{t('pkg_per_session')}</span>
                   </div>
                 </div>
 
@@ -178,7 +175,7 @@ export default function PackageCalculator({ onSelectPackage }) {
                   className={`btn ${isSelected ? 'btn-primary' : 'btn-secondary'} w-full pkg-select-btn`}
                 >
                   <Calendar size={15} />
-                  <span>{isSelected ? 'Reserve This Package' : 'Select Package'}</span>
+                  <span>{isSelected ? t('pkg_reserve') : t('pkg_select')}</span>
                 </button>
               </div>
             );
@@ -190,9 +187,9 @@ export default function PackageCalculator({ onSelectPackage }) {
           <div className="calc-header">
             <div className="calc-title-group">
               <Sparkles className="calc-sparkle" size={20} />
-              <h4>Custom Session Add-Ons</h4>
+              <h4>{t('pkg_addons_title')}</h4>
             </div>
-            <span className="calc-tip">Enhance your collection with luxury physical heirlooms and fast delivery</span>
+            <span className="calc-tip">{t('pkg_addons_tip')}</span>
           </div>
 
           <div className="addons-grid">
@@ -219,16 +216,16 @@ export default function PackageCalculator({ onSelectPackage }) {
           {/* Dynamic Summary Bar */}
           <div className="calc-summary-bar">
             <div className="summary-details">
-              <span className="summary-label">Selected Collection:</span>
+              <span className="summary-label">{t('pkg_selected_collection')}</span>
               <strong className="summary-value">{currentPackage.name} (${currentPackage.basePrice})</strong>
               {addonsTotal > 0 && (
-                <span className="summary-addons"> + {Object.values(selectedAddons).filter(Boolean).length} Add-on(s) (${addonsTotal})</span>
+                <span className="summary-addons"> + {Object.values(selectedAddons).filter(Boolean).length} {t('pkg_addons_count')} (${addonsTotal})</span>
               )}
             </div>
 
             <div className="summary-action-group">
               <div className="total-display">
-                <span className="total-label">Total Estimated:</span>
+                <span className="total-label">{t('pkg_total')}</span>
                 <span className="total-amount">${totalPrice}</span>
               </div>
               <button 
@@ -236,7 +233,7 @@ export default function PackageCalculator({ onSelectPackage }) {
                 className="btn btn-primary"
               >
                 <Calendar size={16} />
-                <span>Book This Collection (${totalPrice})</span>
+                <span>{t('pkg_book_collection')} (${totalPrice})</span>
               </button>
             </div>
           </div>

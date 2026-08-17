@@ -1,215 +1,299 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Camera, Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function Navbar({ activePage, setActivePage }) {
-  const { t, language, setLanguage } = useLanguage();
+export default function Navbar({ onNavigate, currentPage }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
-  const navLinks = [
-    { id: 'home', label: t('nav_home') || 'Home' },
-    { id: 'about', label: t('nav_about') || 'About Studio' },
-    { id: 'contact', label: t('nav_contact') || 'Contact' }
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const languages = [
+    { code: 'en', label: 'English' },
+    { code: 'fr', label: 'Français' },
+    { code: 'ar', label: 'العربية' }
   ];
 
-  const handleNavClick = (e, pageId) => {
-    e.preventDefault();
-    setActivePage(pageId);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleLangChange = (langCode) => {
-    setLanguage(langCode);
-  };
-
   return (
-    <div className="nav-05">
-      <div className="nav-05__bar">
-        <a href="#" className="nav-05__logo" onClick={(e) => handleNavClick(e, 'home')}>
-          <div className="logo-badge">
-            <img src="/logo.jpg" alt="Mission Verse" className="logo-img-circle" />
+    <nav className="navbar-glass">
+      <div className="container nav-container">
+        
+        {/* Brand */}
+        <div className="nav-brand" onClick={() => onNavigate('home')}>
+          <div className="brand-logo-wrap">
+            <Camera size={24} color="var(--accent-cyan)" />
           </div>
-          <span className="brand-title">MISSION VERSE</span>
-        </a>
-        
-        <div className="nav-05__sep"></div>
-        
-        <ul className="nav-05__links">
-          {navLinks.map((link) => (
-            <li key={link.id}>
-              <a 
-                href="#" 
-                className={activePage === link.id ? 'is-active' : ''}
-                onClick={(e) => handleNavClick(e, link.id)}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        
-        <div className="nav-05__sep"></div>
-        
-        <div className="nav-05__lang-switcher">
+          <span className="brand-name">Mission Verse</span>
+        </div>
+
+        {/* Desktop Nav Links */}
+        <div className="nav-links desktop-only">
           <button 
-            className={`lang-btn ${language === 'en' ? 'active' : ''}`}
-            onClick={() => handleLangChange('en')}
+            className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
+            onClick={() => onNavigate('home')}
           >
-            EN
+            {t('nav_home')}
           </button>
           <button 
-            className={`lang-btn ${language === 'fr' ? 'active' : ''}`}
-            onClick={() => handleLangChange('fr')}
+            className={`nav-link ${currentPage === 'about' ? 'active' : ''}`}
+            onClick={() => onNavigate('about')}
           >
-            FR
+            {t('nav_about')}
           </button>
           <button 
-            className={`lang-btn ${language === 'ar' ? 'active' : ''}`}
-            onClick={() => handleLangChange('ar')}
+            className={`nav-link ${currentPage === 'contact' ? 'active' : ''}`}
+            onClick={() => onNavigate('contact')}
           >
-            AR
+            {t('nav_contact')}
+          </button>
+        </div>
+
+        {/* Right Side: Language Switcher & Mobile Toggle */}
+        <div className="nav-actions">
+          
+          {/* Custom Language Switcher Dropdown */}
+          <div className="lang-switcher-container">
+            <button 
+              className="lang-toggle-btn"
+              onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+            >
+              <Globe size={18} />
+              <span className="lang-current-label">
+                {languages.find(l => l.code === language)?.label}
+              </span>
+            </button>
+
+            {isLangMenuOpen && (
+              <div className="lang-dropdown-menu glass-card">
+                {languages.map((lng) => (
+                  <button
+                    key={lng.code}
+                    className={`lang-option ${language === lng.code ? 'active' : ''}`}
+                    onClick={() => {
+                      setLanguage(lng.code);
+                      setIsLangMenuOpen(false);
+                    }}
+                  >
+                    {lng.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <button className="mobile-toggle mobile-only" onClick={toggleMenu}>
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
       </div>
 
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${isOpen ? 'is-open' : ''}`}>
+        <div className="container mobile-links">
+          <button onClick={() => { onNavigate('home'); toggleMenu(); }}>{t('nav_home')}</button>
+          <button onClick={() => { onNavigate('about'); toggleMenu(); }}>{t('nav_about')}</button>
+          <button onClick={() => { onNavigate('contact'); toggleMenu(); }}>{t('nav_contact')}</button>
+        </div>
+      </div>
+
       <style>{`
-        .nav-05 {
+        .navbar-glass {
           position: fixed;
-          top: 24px;
-          left: 0;
-          right: 0;
-          z-index: 999;
-          display: flex;
-          justify-content: center;
-          padding: 0 16px;
-          pointer-events: none; /* Allows clicking through empty space */
+          top: 0; left: 0; right: 0;
+          z-index: 1000;
+          background: rgba(5, 12, 24, 0.6);
+          backdrop-filter: blur(16px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          transition: all 0.3s ease;
         }
 
-        .nav-05__bar {
-          pointer-events: auto;
+        .nav-container {
           display: flex;
           align-items: center;
-          background: rgba(5, 12, 24, 0.22); /* Ultra-transparent "chafaf" glass */
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          padding: 8px 12px;
-          border-radius: 9999px;
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-          gap: 16px;
+          justify-content: space-between;
+          height: 80px;
         }
 
-        .nav-05__logo {
+        .nav-brand {
           display: flex;
           align-items: center;
           gap: 12px;
-          text-decoration: none;
-          padding-left: 6px;
+          cursor: pointer;
         }
 
-        .logo-badge {
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          overflow: hidden;
-          border: 2px solid rgba(30, 111, 255, 0.4);
-          flex-shrink: 0;
+        .brand-logo-wrap {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: rgba(30, 111, 255, 0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(30, 111, 255, 0.3);
         }
 
-        .logo-img-circle {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-        }
-
-        .brand-title {
+        .brand-name {
           font-family: var(--font-serif);
-          font-size: 1.05rem;
-          font-weight: 700;
-          color: #FFFFFF;
-          letter-spacing: 0.05em;
-          white-space: nowrap;
-        }
-
-        .nav-05__sep {
-          width: 1px;
-          height: 24px;
-          background: rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-05__links {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        .nav-05__links a {
-          text-decoration: none;
-          color: rgba(255, 255, 255, 0.85);
-          font-size: 0.9rem;
+          font-size: 1.4rem;
           font-weight: 600;
-          padding: 10px 18px;
-          border-radius: 9999px;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-05__links a:hover {
           color: #FFFFFF;
-          background: rgba(255, 255, 255, 0.15);
+          letter-spacing: 0.02em;
         }
 
-        .nav-05__links a.is-active {
-          background: #FFFFFF;
-          color: #050c18;
-          box-shadow: 0 4px 15px rgba(255, 255, 255, 0.25);
+        .nav-links {
+          display: flex;
+          gap: 32px;
         }
 
-        .nav-05__lang-switcher {
+        .nav-link {
+          background: none;
+          border: none;
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.7);
+          cursor: pointer;
+          transition: var(--transition-smooth);
+          position: relative;
+          padding: 8px 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+          color: #FFFFFF;
+        }
+
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: 0; left: 0;
+          width: 0%;
+          height: 2px;
+          background: var(--accent-cyan);
+          transition: var(--transition-smooth);
+        }
+
+        .nav-link.active::after, .nav-link:hover::after {
+          width: 100%;
+        }
+
+        .nav-actions {
           display: flex;
           align-items: center;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 9999px;
-          padding: 4px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          margin-right: 4px;
+          gap: 16px;
         }
 
-        .lang-btn {
-          background: transparent;
-          color: rgba(255, 255, 255, 0.5);
-          border: none;
-          padding: 6px 12px;
-          border-radius: 9999px;
-          font-size: 0.8rem;
-          font-weight: 700;
+        /* Language Switcher */
+        .lang-switcher-container {
+          position: relative;
+        }
+
+        .lang-toggle-btn {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: #FFFFFF;
+          padding: 8px 16px;
+          border-radius: 20px;
+          font-size: 0.9rem;
           cursor: pointer;
           transition: all 0.3s ease;
         }
 
-        .lang-btn:hover {
+        .lang-toggle-btn:hover {
+          background: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .lang-dropdown-menu {
+          position: absolute;
+          top: calc(100% + 8px);
+          right: 0;
+          min-width: 140px;
+          display: flex;
+          flex-direction: column;
+          padding: 8px;
+          border-radius: 12px;
+          z-index: 1010;
+        }
+
+        .lang-option {
+          background: none;
+          border: none;
+          text-align: left;
+          padding: 10px 16px;
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 0.9rem;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .lang-option:hover {
+          background: rgba(255, 255, 255, 0.1);
           color: #FFFFFF;
         }
 
-        .lang-btn.active {
-          background: #FFFFFF;
-          color: #050c18;
-          box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+        .lang-option.active {
+          background: var(--accent-cyan);
+          color: #000;
+          font-weight: 600;
         }
-        
-        @media (max-width: 900px) {
-          .nav-05__bar { gap: 10px; }
-          .nav-05__links a { padding: 8px 12px; font-size: 0.85rem; }
-          .brand-title { display: none; }
+
+        .mobile-toggle {
+          background: none;
+          border: none;
+          color: #FFFFFF;
+          cursor: pointer;
         }
-        
-        @media (max-width: 600px) {
-          .nav-05__sep { display: none; }
-          .nav-05__links { display: none; }
-          .nav-05__bar { width: 100%; justify-content: space-between; }
+
+        .mobile-menu {
+          position: absolute;
+          top: 80px;
+          left: 0; right: 0;
+          background: rgba(5, 12, 24, 0.95);
+          backdrop-filter: blur(16px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 24px 0;
+          transform: translateY(-100%);
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mobile-menu.is-open {
+          transform: translateY(0);
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .mobile-links {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .mobile-links button {
+          background: none;
+          border: none;
+          font-size: 1.2rem;
+          color: #FFFFFF;
+          text-align: left;
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .desktop-only { display: flex; }
+        .mobile-only { display: none; }
+
+        @media (max-width: 768px) {
+          .desktop-only { display: none; }
+          .mobile-only { display: flex; }
+          .lang-current-label { display: none; } /* hide text on mobile */
+          .lang-toggle-btn { padding: 8px; border-radius: 50%; }
         }
       `}</style>
-    </div>
+    </nav>
   );
 }
