@@ -140,6 +140,12 @@ export default function FAQAccordion() {
           .faq-item { padding: 16px 18px; }
           .faq-q-text h3 { font-size: 0.9rem; }
         }
+        @media (max-width: 480px) {
+          .faq-section { padding: 40px 0; }
+          .faq-item { padding: 12px 14px; }
+          .faq-q-text h3 { font-size: 0.85rem; }
+          .faq-number { min-width: 20px; font-size: 0.85rem; }
+        }
       `}</style>
     </section>
   );

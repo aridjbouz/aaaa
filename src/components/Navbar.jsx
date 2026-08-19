@@ -199,15 +199,7 @@ export default function Navbar({ activePage, setActivePage }) {
         }
         
         @media (max-width: 900px) {
-          .nav-05__bar { gap: 10px; }
-          .nav-05__links a { padding: 8px 12px; font-size: 0.85rem; }
-          .brand-title { display: none; }
-        }
-        
-        @media (max-width: 600px) {
-          .nav-05__sep { display: none; }
-          .nav-05__links { display: none; }
-          .nav-05__bar { width: 100%; justify-content: space-between; }
+          .nav-05 { display: none; }
         }
       `}</style>
     </div>

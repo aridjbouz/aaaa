@@ -110,14 +110,16 @@ export default function Home({ onNavigate, onBookSession }) {
                     '/photos/2.JPG',
                     '/photos/3.JPG',
                     '/photos/4.JPG',
-                    '/photos/5.JPG',
-                    '/photos/6.png',
+                    '/photos/6.jpg',
+                    '/photos/7.jpg',
+                    '/photos/8.jpg',
                     '/photos/1.JPG',
                     '/photos/2.JPG',
                     '/photos/3.JPG',
                     '/photos/4.JPG',
-                    '/photos/5.JPG',
-                    '/photos/6.png',
+                    '/photos/6.jpg',
+                    '/photos/7.jpg',
+                    '/photos/8.jpg',
                   ].map((src, idx) => (
                     <div key={`r1-${idx}`} className="photo-card glass-card">
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
@@ -128,18 +130,20 @@ export default function Home({ onNavigate, onBookSession }) {
                 {/* Row 2: Right */}
                 <div className="marquee-track track-right">
                   {[
-                    '/photos/6.png',
-                    '/photos/5.JPG',
-                    '/photos/4.JPG',
-                    '/photos/3.JPG',
-                    '/photos/2.JPG',
-                    '/photos/1.JPG',
-                    '/photos/6.png',
-                    '/photos/5.JPG',
-                    '/photos/4.JPG',
-                    '/photos/3.JPG',
-                    '/photos/2.JPG',
-                    '/photos/1.JPG',
+                    '/photos/9.jpg',
+                    '/photos/10.jpg',
+                    '/photos/11.jpg',
+                    '/photos/12.jpg',
+                    '/photos/13.jpg',
+                    '/photos/14.jpg',
+                    '/photos/15.jpg',
+                    '/photos/9.jpg',
+                    '/photos/10.jpg',
+                    '/photos/11.jpg',
+                    '/photos/12.jpg',
+                    '/photos/13.jpg',
+                    '/photos/14.jpg',
+                    '/photos/15.jpg',
                   ].map((src, idx) => (
                     <div key={`r2-${idx}`} className="photo-card glass-card">
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
@@ -150,18 +154,18 @@ export default function Home({ onNavigate, onBookSession }) {
                 {/* Row 3: Left */}
                 <div className="marquee-track track-left">
                   {[
-                    '/photos/3.JPG',
-                    '/photos/4.JPG',
-                    '/photos/1.JPG',
-                    '/photos/6.png',
-                    '/photos/2.JPG',
-                    '/photos/5.JPG',
-                    '/photos/3.JPG',
-                    '/photos/4.JPG',
-                    '/photos/1.JPG',
-                    '/photos/6.png',
-                    '/photos/2.JPG',
-                    '/photos/5.JPG',
+                    '/photos/16.jpg',
+                    '/photos/17.jpg',
+                    '/photos/18.jpg',
+                    '/photos/19.jpg',
+                    '/photos/20.jpg',
+                    '/photos/21.jpg',
+                    '/photos/16.jpg',
+                    '/photos/17.jpg',
+                    '/photos/18.jpg',
+                    '/photos/19.jpg',
+                    '/photos/20.jpg',
+                    '/photos/21.jpg',
                   ].map((src, idx) => (
                     <div key={`r3-${idx}`} className="photo-card glass-card">
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
@@ -404,7 +408,7 @@ export default function Home({ onNavigate, onBookSession }) {
         }
 
         .photo-card {
-          width: 320px;
+          width: clamp(240px, 75vw, 320px);
           height: 220px;
           flex-shrink: 0;
           border-radius: 20px;
@@ -473,6 +477,7 @@ export default function Home({ onNavigate, onBookSession }) {
           .pillars-grid { grid-template-columns: repeat(2, 1fr); }
           .experience-split { grid-template-columns: 1fr; }
           .experience-image-side { min-height: 300px; }
+          .v1-frames-container { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
           .hero-section { min-height: 80vh; }
@@ -481,9 +486,14 @@ export default function Home({ onNavigate, onBookSession }) {
           .pillars-grid { grid-template-columns: 1fr; }
           .experience-text-side { padding: 24px 18px; }
           .cta-banner-card { padding: 40px 18px; }
+          .v1-frames-container { grid-template-columns: 1fr; gap: 24px; }
+          .v1-content-layer { gap: 100px; padding: 60px 0 100px 0; }
         }
         @media (max-width: 480px) {
           .hero-logo-ring { width: 160px; height: 160px; }
+          .v1-content-layer { gap: 60px; padding: 40px 0 80px 0; }
+          .v1-frame { padding: 24px 16px; }
+          .photo-card { height: 180px; }
         }
       `}</style>
     </div>

@@ -629,6 +629,14 @@ export default function VideoReelPlayer({ onBookSession }) {
             grid-template-columns: 1fr;
           }
         }
+
+        @media (max-width: 480px) {
+          .player-viewport { height: 360px; }
+          .player-top-bar { padding: 12px; flex-direction: column; align-items: flex-start; gap: 8px; }
+          .player-controls-bar { padding: 16px; }
+          .center-play-button { width: 56px; height: 56px; }
+          .audio-wave-pill { top: 12px; right: 12px; padding: 6px 10px; }
+        }
       `}</style>
     </section>
   );

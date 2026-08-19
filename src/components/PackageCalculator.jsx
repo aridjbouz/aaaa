@@ -545,6 +545,15 @@ export default function PackageCalculator({ onSelectPackage }) {
             justify-content: space-between;
           }
         }
+
+        @media (max-width: 480px) {
+          .packages-section { padding: 40px 0; }
+          .package-card { padding: 24px 16px; }
+          .calculator-box { padding: 20px 16px; }
+          .price-num { font-size: 2.2rem; }
+          .summary-action-group { flex-direction: column; gap: 16px; align-items: stretch; }
+          .total-display { text-align: left; }
+        }
       `}</style>
     </section>
   );

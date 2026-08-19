@@ -585,6 +585,16 @@ export default function PhotoGallery({ onBookSession }) {
             padding: 24px 20px;
           }
         }
+
+        @media (max-width: 480px) {
+          .gallery-image-wrap { height: 220px; }
+          .photo-gallery-section { padding: 40px 0; }
+          .gallery-filter-bar { gap: 6px; }
+          .filter-pill-btn { padding: 8px 14px; font-size: 0.8rem; }
+          .lightbox-dialog { border-radius: 16px; margin: 0 10px; }
+          .lightbox-details-side { padding: 16px; }
+          .lightbox-full-img { max-height: 400px; }
+        }
       `}</style>
     </section>
   );

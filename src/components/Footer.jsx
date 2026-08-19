@@ -151,6 +151,13 @@ export default function Footer() {
           font-size: 0.85rem;
           color: rgba(255, 255, 255, 0.7);
         }
+
+        @media (max-width: 480px) {
+          .footer-section { padding: 40px 0 30px 0; }
+          .footer-contacts-row { flex-direction: column; width: 100%; gap: 12px; }
+          .footer-contact-pill { width: 100%; justify-content: center; padding: 10px 16px; font-size: 0.85rem; }
+          .brand-title { font-size: 1.15rem; }
+        }
       `}</style>
     </footer>
   );
