@@ -1,5 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+﻿import React, { useRef } from 'react';
 import {
   Sparkles,
   Film,
@@ -21,30 +20,11 @@ import { useGSAP3D } from '../hooks/useGSAP3D';
 export default function Home({ onNavigate, onBookSession }) {
   const { t } = useLanguage();
   const pageRef = useRef(null);
-  const [lightboxIndex, setLightboxIndex] = useState(null);
-
-  const allPhotos = [
-    '/photos/1.jpg','/photos/2.jpg','/photos/3.jpg','/photos/4.jpg',
-    '/photos/5.jpg','/photos/6.jpg','/photos/7.jpg','/photos/8.jpg',
-    '/photos/9.jpg','/photos/10.jpg','/photos/11.jpg','/photos/12.jpg',
-    '/photos/13.jpg','/photos/14.jpg','/photos/15.jpg','/photos/16.jpg',
-    '/photos/17.jpg','/photos/18.jpg','/photos/19.jpg','/photos/21.jpg',
-  ];
-
-  const openLightbox = useCallback((src) => {
-    const idx = allPhotos.indexOf(src);
-    setLightboxIndex(idx >= 0 ? idx : 0);
-  }, []);
-
-  const closeLightbox = () => setLightboxIndex(null);
-  const prevPhoto = (e) => { e.stopPropagation(); setLightboxIndex(i => (i - 1 + allPhotos.length) % allPhotos.length); };
-  const nextPhoto = (e) => { e.stopPropagation(); setLightboxIndex(i => (i + 1) % allPhotos.length); };
-
   useGSAP3D(pageRef);
 
   return (
     <div className="home-page-root" ref={pageRef}>
-      {/* ── Hero Section — full video background ── */}
+      {/* ÔöÇÔöÇ Hero Section ÔÇö full video background ÔöÇÔöÇ */}
       <section className="hero-section" id="hero">
         {/* Background video */}
         <div className="hero-video-bg">
@@ -70,11 +50,11 @@ export default function Home({ onNavigate, onBookSession }) {
         </div>
       </section>
 
-      {/* ── Content Over Hero ── */}
+      {/* ÔöÇÔöÇ Content Over Hero ÔöÇÔöÇ */}
       <div className="content-over-hero">
-        {/* ── Section 2 & 3 Combined: Cinematic Reel & Photo Marquee over v1.mp4 ── */}
+        {/* ÔöÇÔöÇ Section 2 & 3 Combined: Cinematic Reel & Photo Marquee over v1.mp4 ÔöÇÔöÇ */}
         <section className="v1-section-wrapper">
-          <div className="v1-video-sticky-bg" data-gsap="pin-v1">
+          <div className="v1-video-sticky-bg">
             <video
               src="/vedios/v1.mp4"
               autoPlay
@@ -123,47 +103,68 @@ export default function Home({ onNavigate, onBookSession }) {
               </div>
 
               <div className="marquee-wrapper">
-                {/* Row 1: Left — photos 1-7 */}
+                {/* Row 1: Left */}
                 <div className="marquee-track track-left">
                   {[
-                    '/photos/1.jpg', '/photos/2.jpg', '/photos/3.jpg', '/photos/4.jpg',
-                    '/photos/5.jpg', '/photos/6.jpg', '/photos/7.jpg',
-                    '/photos/1.jpg', '/photos/2.jpg', '/photos/3.jpg', '/photos/4.jpg',
-                    '/photos/5.jpg', '/photos/6.jpg', '/photos/7.jpg',
+                    '/photos/1.JPG',
+                    '/photos/2.JPG',
+                    '/photos/3.JPG',
+                    '/photos/4.JPG',
+                    '/photos/5.JPG',
+                    '/photos/6.png',
+                    '/photos/1.JPG',
+                    '/photos/2.JPG',
+                    '/photos/3.JPG',
+                    '/photos/4.JPG',
+                    '/photos/5.JPG',
+                    '/photos/6.png',
                   ].map((src, idx) => (
-                    <div key={`r1-${idx}`} className="photo-card glass-card" onClick={() => openLightbox(src)} style={{ cursor: 'pointer' }}>
+                    <div key={`r1-${idx}`} className="photo-card glass-card">
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
-                      <div className="photo-card-zoom-hint">🔍</div>
                     </div>
                   ))}
                 </div>
 
-                {/* Row 2: Right — photos 8-14 */}
+                {/* Row 2: Right */}
                 <div className="marquee-track track-right">
                   {[
-                    '/photos/8.jpg', '/photos/9.jpg', '/photos/10.jpg', '/photos/11.jpg',
-                    '/photos/12.jpg', '/photos/13.jpg', '/photos/14.jpg',
-                    '/photos/8.jpg', '/photos/9.jpg', '/photos/10.jpg', '/photos/11.jpg',
-                    '/photos/12.jpg', '/photos/13.jpg', '/photos/14.jpg',
+                    '/photos/6.png',
+                    '/photos/5.JPG',
+                    '/photos/4.JPG',
+                    '/photos/3.JPG',
+                    '/photos/2.JPG',
+                    '/photos/1.JPG',
+                    '/photos/6.png',
+                    '/photos/5.JPG',
+                    '/photos/4.JPG',
+                    '/photos/3.JPG',
+                    '/photos/2.JPG',
+                    '/photos/1.JPG',
                   ].map((src, idx) => (
-                    <div key={`r2-${idx}`} className="photo-card glass-card" onClick={() => openLightbox(src)} style={{ cursor: 'pointer' }}>
+                    <div key={`r2-${idx}`} className="photo-card glass-card">
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
-                      <div className="photo-card-zoom-hint">🔍</div>
                     </div>
                   ))}
                 </div>
 
-                {/* Row 3: Left — photos 15-21 */}
+                {/* Row 3: Left */}
                 <div className="marquee-track track-left">
                   {[
-                    '/photos/15.jpg', '/photos/16.jpg', '/photos/17.jpg', '/photos/18.jpg',
-                    '/photos/19.jpg', '/photos/21.jpg',
-                    '/photos/15.jpg', '/photos/16.jpg', '/photos/17.jpg', '/photos/18.jpg',
-                    '/photos/19.jpg', '/photos/21.jpg',
+                    '/photos/3.JPG',
+                    '/photos/4.JPG',
+                    '/photos/1.JPG',
+                    '/photos/6.png',
+                    '/photos/2.JPG',
+                    '/photos/5.JPG',
+                    '/photos/3.JPG',
+                    '/photos/4.JPG',
+                    '/photos/1.JPG',
+                    '/photos/6.png',
+                    '/photos/2.JPG',
+                    '/photos/5.JPG',
                   ].map((src, idx) => (
-                    <div key={`r3-${idx}`} className="photo-card glass-card" onClick={() => openLightbox(src)} style={{ cursor: 'pointer' }}>
+                    <div key={`r3-${idx}`} className="photo-card glass-card">
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
-                      <div className="photo-card-zoom-hint">🔍</div>
                     </div>
                   ))}
                 </div>
@@ -176,52 +177,17 @@ export default function Home({ onNavigate, onBookSession }) {
 
       </div>
 
-      {/* ── Marquee Lightbox ── */}
-      {lightboxIndex !== null && (
-        <div className="marquee-lightbox-backdrop" onClick={closeLightbox}>
-          <button className="marquee-lightbox-close" onClick={closeLightbox} aria-label="Close">
-            <X size={28} />
-          </button>
-
-          {/* Prev */}
-          <button className="marquee-lightbox-nav marquee-lightbox-prev" onClick={prevPhoto} aria-label="Previous">
-            <ChevronLeft size={36} />
-          </button>
-
-          <div className="marquee-lightbox-content" onClick={e => e.stopPropagation()}>
-            <img src={allPhotos[lightboxIndex]} alt="Enlarged" className="marquee-lightbox-img" />
-            <div className="marquee-lightbox-counter">{lightboxIndex + 1} / {allPhotos.length}</div>
-          </div>
-
-          {/* Next */}
-          <button className="marquee-lightbox-nav marquee-lightbox-next" onClick={nextPhoto} aria-label="Next">
-            <ChevronRight size={36} />
-          </button>
-        </div>
-      )}
-
       <style>{`
         .home-page-root { position: relative; background: var(--bg-main); }
 
         .content-over-hero {
           position: relative;
           z-index: 1;
-          background: transparent; /* Changed from var(--bg-main) to transparent so v1.mp4 is visible all the way down */
+          background: var(--bg-main);
           box-shadow: 0 -20px 40px rgba(0,0,0,0.5); /* subtle shadow when sliding over */
         }
 
-        /* If we want a dark gradient background under the content so it's not fully transparent over the video: */
-        .v1-content-layer {
-          position: relative;
-          z-index: 2;
-          display: flex;
-          flex-direction: column;
-          gap: 180px;
-          padding: 120px 0 0 0; /* removed bottom padding so footer is at the end */
-          background: transparent; /* Changed to fully transparent so video is visible */
-        }
-
-        /* ── Hero ── */
+        /* ÔöÇÔöÇ Hero ÔöÇÔöÇ */
         .hero-section {
           position: relative;
           height: 100vh;
@@ -285,18 +251,15 @@ export default function Home({ onNavigate, onBookSession }) {
           }
         }
 
-        /* ── Combined V1 Section (Sticky Video v1 + Content Layer) ── */
+        /* ÔöÇÔöÇ Combined V1 Section (Sticky Video v1 + Content Layer) ÔöÇÔöÇ */
         .v1-section-wrapper {
           position: relative;
           width: 100%;
         }
 
         .v1-video-sticky-bg {
-          /* Using GSAP pinning instead of CSS sticky */
-          position: absolute; /* Reverted to absolute, GSAP will manage position: fixed pinning */
+          position: sticky;
           top: 0;
-          left: 0;
-          width: 100%;
           height: 100vh;
           z-index: 0;
           overflow: hidden;
@@ -315,7 +278,15 @@ export default function Home({ onNavigate, onBookSession }) {
           z-index: 1;
         }
 
-
+        .v1-content-layer {
+          position: relative;
+          z-index: 2;
+          margin-top: -100vh;
+          display: flex;
+          flex-direction: column;
+          gap: 180px;
+          padding: 120px 0 160px 0;
+        }
 
         .v1-frames-container {
           position: relative;
@@ -329,10 +300,12 @@ export default function Home({ onNavigate, onBookSession }) {
         }
 
         .v1-frame {
-          background: transparent; /* Made fully transparent */
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(5, 12, 24, 0.25); /* Transparent glass over v1 */
+          backdrop-filter: blur(14px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
           border-radius: 24px;
           padding: 30px 24px;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
           display: flex;
           flex-direction: column;
           gap: 16px;
@@ -369,7 +342,7 @@ export default function Home({ onNavigate, onBookSession }) {
           font-style: normal;
         }
 
-        /* ── Photo Marquee Block (over v1.mp4) ── */
+        /* ÔöÇÔöÇ Photo Marquee Block (over v1.mp4) ÔöÇÔöÇ */
         .photo-marquee-block {
           position: relative;
           overflow: hidden;
@@ -431,7 +404,7 @@ export default function Home({ onNavigate, onBookSession }) {
         }
 
         .photo-card {
-          width: clamp(240px, 75vw, 320px);
+          width: 320px;
           height: 220px;
           flex-shrink: 0;
           border-radius: 20px;
@@ -454,7 +427,7 @@ export default function Home({ onNavigate, onBookSession }) {
           display: block;
         }
 
-        /* ── CTA Banner ── */
+        /* ÔöÇÔöÇ CTA Banner ÔöÇÔöÇ */
         .cta-banner-section { padding: 60px 0 100px 0; }
         .cta-banner-card {
           background: linear-gradient(135deg, #0A1628 0%, #0D1F3C 50%, #080F1E 100%);
@@ -495,12 +468,11 @@ export default function Home({ onNavigate, onBookSession }) {
           gap: 14px; flex-wrap: wrap;
         }
 
-        /* ── Responsive ── */
+        /* ÔöÇÔöÇ Responsive ÔöÇÔöÇ */
         @media (max-width: 1024px) {
           .pillars-grid { grid-template-columns: repeat(2, 1fr); }
           .experience-split { grid-template-columns: 1fr; }
           .experience-image-side { min-height: 300px; }
-          .v1-frames-container { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
           .hero-section { min-height: 80vh; }
@@ -509,81 +481,9 @@ export default function Home({ onNavigate, onBookSession }) {
           .pillars-grid { grid-template-columns: 1fr; }
           .experience-text-side { padding: 24px 18px; }
           .cta-banner-card { padding: 40px 18px; }
-          .v1-frames-container { grid-template-columns: 1fr; gap: 24px; }
-          .v1-content-layer { gap: 100px; padding: 60px 0 100px 0; }
         }
         @media (max-width: 480px) {
           .hero-logo-ring { width: 160px; height: 160px; }
-          .v1-content-layer { gap: 60px; padding: 40px 0 80px 0; }
-          .v1-frame { padding: 24px 16px; }
-          .photo-card { height: 180px; }
-        }
-
-        /* ── Photo Card Zoom Hint ── */
-        .photo-card { position: relative; }
-        .photo-card-zoom-hint {
-          position: absolute;
-          top: 50%; left: 50%;
-          transform: translate(-50%, -50%) scale(0);
-          font-size: 1.8rem;
-          opacity: 0;
-          transition: opacity 0.25s ease, transform 0.25s ease;
-          pointer-events: none;
-          filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
-        }
-        .photo-card:hover .photo-card-zoom-hint {
-          opacity: 1;
-          transform: translate(-50%, -50%) scale(1);
-        }
-
-        /* ── Marquee Lightbox ── */
-        .marquee-lightbox-backdrop {
-          position: fixed;
-          inset: 0;
-          z-index: 2000;
-          background: rgba(0, 0, 0, 0.92);
-          backdrop-filter: blur(16px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 20px;
-          animation: lbFadeIn 0.25s ease;
-        }
-        @keyframes lbFadeIn {
-          from { opacity: 0; }
-          to   { opacity: 1; }
-        }
-        .marquee-lightbox-close {
-          position: fixed;
-          top: 20px; right: 20px;
-          z-index: 2100;
-          width: 48px; height: 48px;
-          border-radius: 50%;
-          background: rgba(255,255,255,0.15);
-          border: 1px solid rgba(255,255,255,0.3);
-          color: #fff;
-          display: flex; align-items: center; justify-content: center;
-          cursor: pointer;
-          transition: background 0.2s ease;
-        }
-        .marquee-lightbox-close:hover { background: rgba(255,255,255,0.3); }
-        .marquee-lightbox-content {
-          max-width: 90vw;
-          max-height: 90vh;
-          animation: lbZoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes lbZoomIn {
-          from { transform: scale(0.8); opacity: 0; }
-          to   { transform: scale(1);   opacity: 1; }
-        }
-        .marquee-lightbox-img {
-          max-width: 90vw;
-          max-height: 90vh;
-          width: auto;
-          height: auto;
-          object-fit: contain;
-          border-radius: 16px;
-          box-shadow: 0 30px 80px rgba(0,0,0,0.6);
         }
       `}</style>
     </div>
