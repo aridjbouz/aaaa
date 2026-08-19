@@ -219,7 +219,7 @@ export default function Home({ onNavigate, onBookSession }) {
           flex-direction: column;
           gap: 180px;
           padding: 120px 0 0 0; /* removed bottom padding so footer is at the end */
-          background: transparent; /* Changed to fully transparent as requested so video shows clearly */
+          background: transparent; /* Changed to fully transparent so video is visible */
         }
 
         /* ── Hero ── */
@@ -327,12 +327,10 @@ export default function Home({ onNavigate, onBookSession }) {
         }
 
         .v1-frame {
-          background: rgba(5, 12, 24, 0.25); /* Transparent glass over v1 */
-          backdrop-filter: blur(14px);
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          background: transparent; /* Made fully transparent */
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 24px;
           padding: 30px 24px;
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
           display: flex;
           flex-direction: column;
           gap: 16px;
@@ -500,17 +498,7 @@ export default function Home({ onNavigate, onBookSession }) {
           .pillars-grid { grid-template-columns: repeat(2, 1fr); }
           .experience-split { grid-template-columns: 1fr; }
           .experience-image-side { min-height: 300px; }
-          .v1-frames-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding-bottom: 20px;
-            gap: 16px;
-          }
-          .v1-frame {
-            min-width: 80vw;
-            scroll-snap-align: center;
-          }
+          .v1-frames-container { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
           .hero-section { min-height: 80vh; }
@@ -519,6 +507,7 @@ export default function Home({ onNavigate, onBookSession }) {
           .pillars-grid { grid-template-columns: 1fr; }
           .experience-text-side { padding: 24px 18px; }
           .cta-banner-card { padding: 40px 18px; }
+          .v1-frames-container { grid-template-columns: 1fr; gap: 24px; }
           .v1-content-layer { gap: 100px; padding: 60px 0 100px 0; }
         }
         @media (max-width: 480px) {

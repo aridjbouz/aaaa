@@ -54,8 +54,8 @@ export default function Footer() {
         .footer-section {
           background: transparent;
           color: rgba(255, 255, 255, 0.85);
-          padding: 60px 0 100px 0; /* Add bottom padding so mobile bottom bar doesn't cover footer content */
-          border-top: 1px solid rgba(255, 255, 255, 0.15);
+          padding: 60px 0 40px 0;
+          border-top: none;
           width: 100%;
         }
 
