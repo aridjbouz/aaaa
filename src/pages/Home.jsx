@@ -614,12 +614,48 @@ export default function Home({ onNavigate, onBookSession }) {
         }
         .marquee-lightbox-img {
           max-width: 90vw;
-          max-height: 90vh;
+          max-height: 85vh;
           width: auto;
           height: auto;
           object-fit: contain;
           border-radius: 16px;
           box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+        }
+        
+        .marquee-lightbox-nav {
+          position: fixed;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 2100;
+          width: 56px; height: 56px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.2);
+          color: #fff;
+          display: flex; align-items: center; justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .marquee-lightbox-nav:hover {
+          background: rgba(255,255,255,0.25);
+          transform: translateY(-50%) scale(1.1);
+        }
+        .marquee-lightbox-prev { left: 30px; }
+        .marquee-lightbox-next { right: 30px; }
+        
+        .marquee-lightbox-counter {
+          text-align: center;
+          color: rgba(255,255,255,0.7);
+          margin-top: 16px;
+          font-size: 1.1rem;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+          .marquee-lightbox-nav { width: 44px; height: 44px; }
+          .marquee-lightbox-prev { left: 10px; }
+          .marquee-lightbox-next { right: 10px; }
         }
       `}</style>
     </div>
