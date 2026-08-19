@@ -190,7 +190,6 @@ export default function Home({ onNavigate, onBookSession }) {
 
           <div className="marquee-lightbox-content" onClick={e => e.stopPropagation()}>
             <img src={allPhotos[lightboxIndex]} alt="Enlarged" className="marquee-lightbox-img" />
-            <div className="marquee-lightbox-counter">{lightboxIndex + 1} / {allPhotos.length}</div>
           </div>
 
           {/* Next */}
@@ -642,15 +641,6 @@ export default function Home({ onNavigate, onBookSession }) {
         }
         .marquee-lightbox-prev { left: 30px; }
         .marquee-lightbox-next { right: 30px; }
-        
-        .marquee-lightbox-counter {
-          text-align: center;
-          color: rgba(255,255,255,0.7);
-          margin-top: 16px;
-          font-size: 1.1rem;
-          font-weight: 500;
-          letter-spacing: 0.05em;
-        }
 
         @media (max-width: 768px) {
           .marquee-lightbox-nav { width: 44px; height: 44px; }
