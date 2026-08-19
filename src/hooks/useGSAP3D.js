@@ -179,6 +179,17 @@ export function useGSAP3D(containerRef) {
           }
         });
       });
+
+      // pin-v1 — Pins the v1 video background using GSAP instead of CSS sticky
+      gsap.utils.toArray('[data-gsap="pin-v1"]').forEach((el) => {
+        ScrollTrigger.create({
+          trigger: el.parentElement,
+          start: 'top top',
+          end: 'bottom bottom',
+          pin: el,
+          pinSpacing: false,
+        });
+      });
     }, containerRef);
 
     return () => ctx.revert();

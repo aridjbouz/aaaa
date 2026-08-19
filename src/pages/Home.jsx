@@ -74,7 +74,7 @@ export default function Home({ onNavigate, onBookSession }) {
       <div className="content-over-hero">
         {/* ── Section 2 & 3 Combined: Cinematic Reel & Photo Marquee over v1.mp4 ── */}
         <section className="v1-section-wrapper">
-          <div className="v1-video-sticky-bg">
+          <div className="v1-video-sticky-bg" data-gsap="pin-v1">
             <video
               src="/vedios/v1.mp4"
               autoPlay
@@ -293,8 +293,11 @@ export default function Home({ onNavigate, onBookSession }) {
         }
 
         .v1-video-sticky-bg {
-          position: sticky;
+          /* Using GSAP pinning instead of CSS sticky */
+          position: absolute; /* Reverted to absolute, GSAP will manage position: fixed pinning */
           top: 0;
+          left: 0;
+          width: 100%;
           height: 100vh;
           z-index: 0;
           overflow: hidden;
