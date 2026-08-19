@@ -331,31 +331,31 @@ export default function Home({ onNavigate, onBookSession }) {
         .v1-frame {
           background: transparent; /* Made fully transparent */
           border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 20px; /* slightly smaller border-radius */
-          padding: 24px 20px; /* Reduced padding from 30px 24px */
+          border-radius: 24px;
+          padding: 30px 24px;
           display: flex;
           flex-direction: column;
-          gap: 12px; /* Reduced gap from 16px */
+          gap: 16px;
           font-style: italic;
         }
 
         .v1-frame-title {
-          font-size: 1.8rem; /* Reduced from 2.2rem */
+          font-size: 2.2rem;
           color: #FFFFFF;
-          margin-bottom: 6px; /* Reduced from 8px */
+          margin-bottom: 8px;
           line-height: 1.2;
         }
 
         .v1-frame-subtitle {
-          font-size: 1.2rem; /* Reduced from 1.4rem */
+          font-size: 1.4rem;
           color: var(--accent-cyan);
           font-weight: 500;
         }
 
         .v1-frame p {
           color: rgba(255, 255, 255, 0.85);
-          font-size: 1rem; /* Reduced from 1.1rem */
-          line-height: 1.6; /* Reduced from 1.7 */
+          font-size: 1.1rem;
+          line-height: 1.7;
         }
 
         .v1-frame strong {
@@ -497,38 +497,62 @@ export default function Home({ onNavigate, onBookSession }) {
 
         /* ── Responsive ── */
         @media (max-width: 1024px) {
-          .pillars-grid { grid-template-columns: repeat(2, 1fr); }
-          .experience-split { grid-template-columns: 1fr; }
-          .experience-image-side { min-height: 300px; }
           .v1-frames-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding-bottom: 16px;
-            gap: 12px;
+            gap: 16px;
+            padding: 0 16px;
           }
           .v1-frame {
-            min-width: 70vw; /* Reduced from 80vw to make them visibly smaller and hint at scrolling */
-            scroll-snap-align: center;
+            padding: 20px 16px;
+            gap: 12px;
+            border-radius: 16px;
           }
+          .v1-frame-title { font-size: 1.8rem; }
+          .v1-frame-subtitle { font-size: 1.2rem; }
+          .v1-frame p { font-size: 0.95rem; line-height: 1.5; }
+          .v1-cta-btn { font-size: 0.9rem; padding: 10px 16px; }
         }
+        
         @media (max-width: 768px) {
           .hero-section { min-height: 80vh; }
           .hero-container.hero-centered { padding-top: 40px; padding-bottom: 60px; min-height: 80vh; }
           .hero-logo-ring { width: 200px; height: 200px; }
-          .pillars-grid { grid-template-columns: 1fr; }
-          .experience-text-side { padding: 24px 18px; }
-          .cta-banner-card { padding: 40px 18px; }
           .v1-content-layer { gap: 100px; padding: 60px 0 100px 0; }
+          
+          .v1-frames-container {
+            gap: 10px;
+            padding: 0 10px;
+          }
+          .v1-frame {
+            padding: 14px 10px;
+            gap: 8px;
+            border-radius: 12px;
+          }
+          .v1-frame-title { font-size: 1.4rem; }
+          .v1-frame-subtitle { font-size: 1rem; }
+          .v1-frame p { font-size: 0.8rem; line-height: 1.4; }
+          .v1-cta-btn { font-size: 0.8rem; padding: 8px 12px; }
+          .v1-cta-btn svg { width: 14px; height: 14px; }
         }
+        
         @media (max-width: 480px) {
           .hero-logo-ring { width: 160px; height: 160px; }
           .v1-content-layer { gap: 60px; padding: 40px 0 80px 0; }
-          .v1-frame { padding: 18px 14px; gap: 10px; } /* Even smaller on mobile */
-          .v1-frame-title { font-size: 1.5rem; }
-          .v1-frame-subtitle { font-size: 1.1rem; }
-          .v1-frame p { font-size: 0.9rem; line-height: 1.5; }
           .photo-card { height: 180px; }
+          
+          .v1-frames-container {
+            gap: 6px;
+            padding: 0 6px;
+          }
+          .v1-frame {
+            padding: 10px 8px;
+            gap: 6px;
+            border-radius: 8px;
+          }
+          .v1-frame-title { font-size: 1.1rem; }
+          .v1-frame-subtitle { font-size: 0.85rem; }
+          .v1-frame p { font-size: 0.65rem; line-height: 1.3; }
+          .v1-cta-btn { font-size: 0.7rem; padding: 6px 10px; margin-top: 8px; }
+          .v1-cta-btn svg { width: 12px; height: 12px; }
         }
 
         /* ── Photo Card Zoom Hint ── */
