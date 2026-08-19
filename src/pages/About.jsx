@@ -221,12 +221,26 @@ export default function About({ onBookSession }) {
         }
 
         @media (max-width: 900px) {
-          .about-cards-grid {
-            grid-template-columns: 1fr;
-          }
-          .about-action-card {
-            padding: 36px 24px;
-          }
+          .about-cards-grid { gap: 16px; }
+          .about-glass-card { padding: 20px 16px; gap: 12px; border-radius: 16px; }
+          .about-glass-card h3 { font-size: 1.1rem; }
+          .about-glass-card p { font-size: 0.85rem; line-height: 1.5; }
+          .about-card-icon { width: 40px; height: 40px; }
+          .about-action-card { padding: 36px 24px; }
+        }
+        
+        @media (max-width: 480px) {
+          .about-content-layer { padding: 80px 10px 80px 10px; gap: 40px; }
+          .about-cards-grid { gap: 8px; }
+          .about-glass-card { padding: 12px 8px; gap: 8px; border-radius: 12px; }
+          .about-glass-card h3 { font-size: 0.85rem; }
+          .about-glass-card p { font-size: 0.65rem; line-height: 1.3; }
+          .about-card-icon { width: 30px; height: 30px; border-radius: 10px; }
+          .about-card-icon svg { width: 16px; height: 16px; }
+          .about-action-card { padding: 24px 16px; border-radius: 20px; }
+          .about-action-card h2 { font-size: 1.2rem; }
+          .about-action-card p { font-size: 0.8rem; }
+          .about-cta-btn { font-size: 0.8rem; padding: 10px 20px; }
         }
       `}</style>
     </div>

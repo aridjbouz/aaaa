@@ -152,9 +152,11 @@ export default function Footer() {
 
         @media (max-width: 480px) {
           .footer-section { padding: 40px 0 30px 0; }
-          .footer-contacts-row { flex-direction: column; width: 100%; gap: 12px; }
-          .footer-contact-pill { width: 100%; justify-content: center; padding: 10px 16px; font-size: 0.85rem; }
-          .brand-title { font-size: 1.15rem; }
+          .footer-contacts-row { gap: 6px; }
+          .footer-contact-pill { padding: 8px 12px; font-size: 0.7rem; gap: 6px; }
+          .footer-contact-pill svg { width: 14px; height: 14px; }
+          .brand-title { font-size: 1.1rem; }
+          .logo-badge { width: 40px; height: 40px; }
         }
       `}</style>
     </footer>

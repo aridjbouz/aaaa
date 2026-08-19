@@ -206,19 +206,33 @@ export default function Contact() {
 
         /* ── Responsive ── */
         @media (max-width: 1024px) {
-          .contact-cards-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+          .contact-cards-grid { gap: 16px; }
+          .contact-glass-item { padding: 24px 16px; gap: 10px; border-radius: 16px; }
+          .contact-glass-item h3 { font-size: 1.1rem; }
+          .contact-glass-item p { font-size: 0.85rem; line-height: 1.4; }
+          .contact-icon-bubble { width: 44px; height: 44px; }
         }
 
-        @media (max-width: 600px) {
-          .contact-cards-grid {
-            grid-template-columns: 1fr;
-          }
+        @media (max-width: 768px) {
+          .contact-cards-grid { gap: 10px; }
+          .contact-glass-item { padding: 16px 10px; gap: 8px; border-radius: 12px; }
+          .contact-glass-item h3 { font-size: 0.95rem; }
+          .contact-glass-item p { font-size: 0.75rem; line-height: 1.3; }
+          .contact-icon-bubble { width: 36px; height: 36px; }
+          .contact-icon-bubble svg { width: 18px; height: 18px; }
+        }
 
-          .contact-content-layer {
-            padding: 120px 16px 80px 16px;
-          }
+        @media (max-width: 480px) {
+          .contact-content-layer { padding: 100px 8px 80px 8px; gap: 40px; }
+          .contact-title { font-size: 2.2rem; }
+          .contact-tagline { font-size: 0.9rem; }
+          
+          .contact-cards-grid { gap: 6px; }
+          .contact-glass-item { padding: 10px 6px; gap: 6px; border-radius: 8px; }
+          .contact-glass-item h3 { font-size: 0.75rem; }
+          .contact-glass-item p { font-size: 0.55rem; line-height: 1.2; word-break: break-word; }
+          .contact-icon-bubble { width: 28px; height: 28px; border-radius: 8px; }
+          .contact-icon-bubble svg { width: 14px; height: 14px; }
         }
       `}</style>
     </div>
