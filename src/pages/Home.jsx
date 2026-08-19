@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { X } from 'lucide-react';
+import React, { useRef, useState, useCallback } from 'react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import {
   Sparkles,
   Film,
@@ -21,7 +21,25 @@ import { useGSAP3D } from '../hooks/useGSAP3D';
 export default function Home({ onNavigate, onBookSession }) {
   const { t } = useLanguage();
   const pageRef = useRef(null);
-  const [lightboxSrc, setLightboxSrc] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const allPhotos = [
+    '/photos/1.jpg','/photos/2.jpg','/photos/3.jpg','/photos/4.jpg',
+    '/photos/5.jpg','/photos/6.jpg','/photos/7.jpg','/photos/8.jpg',
+    '/photos/9.jpg','/photos/10.jpg','/photos/11.jpg','/photos/12.jpg',
+    '/photos/13.jpg','/photos/14.jpg','/photos/15.jpg','/photos/16.jpg',
+    '/photos/17.jpg','/photos/18.jpg','/photos/19.jpg','/photos/21.jpg',
+  ];
+
+  const openLightbox = useCallback((src) => {
+    const idx = allPhotos.indexOf(src);
+    setLightboxIndex(idx >= 0 ? idx : 0);
+  }, []);
+
+  const closeLightbox = () => setLightboxIndex(null);
+  const prevPhoto = (e) => { e.stopPropagation(); setLightboxIndex(i => (i - 1 + allPhotos.length) % allPhotos.length); };
+  const nextPhoto = (e) => { e.stopPropagation(); setLightboxIndex(i => (i + 1) % allPhotos.length); };
+
   useGSAP3D(pageRef);
 
   return (
@@ -113,7 +131,7 @@ export default function Home({ onNavigate, onBookSession }) {
                     '/photos/1.jpg', '/photos/2.jpg', '/photos/3.jpg', '/photos/4.jpg',
                     '/photos/5.jpg', '/photos/6.jpg', '/photos/7.jpg',
                   ].map((src, idx) => (
-                    <div key={`r1-${idx}`} className="photo-card glass-card" onClick={() => setLightboxSrc(src)} style={{ cursor: 'pointer' }}>
+                    <div key={`r1-${idx}`} className="photo-card glass-card" onClick={() => openLightbox(src)} style={{ cursor: 'pointer' }}>
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
                       <div className="photo-card-zoom-hint">🔍</div>
                     </div>
@@ -128,7 +146,7 @@ export default function Home({ onNavigate, onBookSession }) {
                     '/photos/8.jpg', '/photos/9.jpg', '/photos/10.jpg', '/photos/11.jpg',
                     '/photos/12.jpg', '/photos/13.jpg', '/photos/14.jpg',
                   ].map((src, idx) => (
-                    <div key={`r2-${idx}`} className="photo-card glass-card" onClick={() => setLightboxSrc(src)} style={{ cursor: 'pointer' }}>
+                    <div key={`r2-${idx}`} className="photo-card glass-card" onClick={() => openLightbox(src)} style={{ cursor: 'pointer' }}>
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
                       <div className="photo-card-zoom-hint">🔍</div>
                     </div>
@@ -143,7 +161,7 @@ export default function Home({ onNavigate, onBookSession }) {
                     '/photos/15.jpg', '/photos/16.jpg', '/photos/17.jpg', '/photos/18.jpg',
                     '/photos/19.jpg', '/photos/21.jpg',
                   ].map((src, idx) => (
-                    <div key={`r3-${idx}`} className="photo-card glass-card" onClick={() => setLightboxSrc(src)} style={{ cursor: 'pointer' }}>
+                    <div key={`r3-${idx}`} className="photo-card glass-card" onClick={() => openLightbox(src)} style={{ cursor: 'pointer' }}>
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
                       <div className="photo-card-zoom-hint">🔍</div>
                     </div>
@@ -159,14 +177,26 @@ export default function Home({ onNavigate, onBookSession }) {
       </div>
 
       {/* ── Marquee Lightbox ── */}
-      {lightboxSrc && (
-        <div className="marquee-lightbox-backdrop" onClick={() => setLightboxSrc(null)}>
-          <button className="marquee-lightbox-close" onClick={() => setLightboxSrc(null)} aria-label="Close">
+      {lightboxIndex !== null && (
+        <div className="marquee-lightbox-backdrop" onClick={closeLightbox}>
+          <button className="marquee-lightbox-close" onClick={closeLightbox} aria-label="Close">
             <X size={28} />
           </button>
+
+          {/* Prev */}
+          <button className="marquee-lightbox-nav marquee-lightbox-prev" onClick={prevPhoto} aria-label="Previous">
+            <ChevronLeft size={36} />
+          </button>
+
           <div className="marquee-lightbox-content" onClick={e => e.stopPropagation()}>
-            <img src={lightboxSrc} alt="Enlarged" className="marquee-lightbox-img" />
+            <img src={allPhotos[lightboxIndex]} alt="Enlarged" className="marquee-lightbox-img" />
+            <div className="marquee-lightbox-counter">{lightboxIndex + 1} / {allPhotos.length}</div>
           </div>
+
+          {/* Next */}
+          <button className="marquee-lightbox-nav marquee-lightbox-next" onClick={nextPhoto} aria-label="Next">
+            <ChevronRight size={36} />
+          </button>
         </div>
       )}
 
@@ -176,8 +206,20 @@ export default function Home({ onNavigate, onBookSession }) {
         .content-over-hero {
           position: relative;
           z-index: 1;
-          background: var(--bg-main);
+          background: transparent; /* Changed from var(--bg-main) to transparent so v1.mp4 is visible all the way down */
           box-shadow: 0 -20px 40px rgba(0,0,0,0.5); /* subtle shadow when sliding over */
+        }
+
+        /* If we want a dark gradient background under the content so it's not fully transparent over the video: */
+        .v1-content-layer {
+          position: relative;
+          z-index: 2;
+          margin-top: -100vh;
+          display: flex;
+          flex-direction: column;
+          gap: 180px;
+          padding: 120px 0 0 0; /* removed bottom padding so footer is at the end */
+          background: linear-gradient(to bottom, transparent 0%, rgba(5,12,24,0.7) 30%, rgba(5,12,24,0.9) 100%);
         }
 
         /* ── Hero ── */
@@ -271,15 +313,7 @@ export default function Home({ onNavigate, onBookSession }) {
           z-index: 1;
         }
 
-        .v1-content-layer {
-          position: relative;
-          z-index: 2;
-          margin-top: -100vh;
-          display: flex;
-          flex-direction: column;
-          gap: 180px;
-          padding: 120px 0 160px 0;
-        }
+
 
         .v1-frames-container {
           position: relative;
