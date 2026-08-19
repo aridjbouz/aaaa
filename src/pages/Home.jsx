@@ -103,23 +103,13 @@ export default function Home({ onNavigate, onBookSession }) {
               </div>
 
               <div className="marquee-wrapper">
-                {/* Row 1: Left */}
+                {/* Row 1: Left — photos 1-7 */}
                 <div className="marquee-track track-left">
                   {[
-                    '/photos/1.JPG',
-                    '/photos/2.JPG',
-                    '/photos/3.JPG',
-                    '/photos/4.JPG',
-                    '/photos/6.jpg',
-                    '/photos/7.jpg',
-                    '/photos/8.jpg',
-                    '/photos/1.JPG',
-                    '/photos/2.JPG',
-                    '/photos/3.JPG',
-                    '/photos/4.JPG',
-                    '/photos/6.jpg',
-                    '/photos/7.jpg',
-                    '/photos/8.jpg',
+                    '/photos/1.jpg', '/photos/2.jpg', '/photos/3.jpg', '/photos/4.jpg',
+                    '/photos/5.jpg', '/photos/6.jpg', '/photos/7.jpg',
+                    '/photos/1.jpg', '/photos/2.jpg', '/photos/3.jpg', '/photos/4.jpg',
+                    '/photos/5.jpg', '/photos/6.jpg', '/photos/7.jpg',
                   ].map((src, idx) => (
                     <div key={`r1-${idx}`} className="photo-card glass-card">
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
@@ -127,23 +117,13 @@ export default function Home({ onNavigate, onBookSession }) {
                   ))}
                 </div>
 
-                {/* Row 2: Right */}
+                {/* Row 2: Right — photos 8-14 */}
                 <div className="marquee-track track-right">
                   {[
-                    '/photos/9.jpg',
-                    '/photos/10.jpg',
-                    '/photos/11.jpg',
-                    '/photos/12.jpg',
-                    '/photos/13.jpg',
-                    '/photos/14.jpg',
-                    '/photos/15.jpg',
-                    '/photos/9.jpg',
-                    '/photos/10.jpg',
-                    '/photos/11.jpg',
-                    '/photos/12.jpg',
-                    '/photos/13.jpg',
-                    '/photos/14.jpg',
-                    '/photos/15.jpg',
+                    '/photos/8.jpg', '/photos/9.jpg', '/photos/10.jpg', '/photos/11.jpg',
+                    '/photos/12.jpg', '/photos/13.jpg', '/photos/14.jpg',
+                    '/photos/8.jpg', '/photos/9.jpg', '/photos/10.jpg', '/photos/11.jpg',
+                    '/photos/12.jpg', '/photos/13.jpg', '/photos/14.jpg',
                   ].map((src, idx) => (
                     <div key={`r2-${idx}`} className="photo-card glass-card">
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
@@ -151,21 +131,13 @@ export default function Home({ onNavigate, onBookSession }) {
                   ))}
                 </div>
 
-                {/* Row 3: Left */}
+                {/* Row 3: Left — photos 15-21 */}
                 <div className="marquee-track track-left">
                   {[
-                    '/photos/16.jpg',
-                    '/photos/17.jpg',
-                    '/photos/18.jpg',
-                    '/photos/19.jpg',
-                    '/photos/20.jpg',
-                    '/photos/21.jpg',
-                    '/photos/16.jpg',
-                    '/photos/17.jpg',
-                    '/photos/18.jpg',
-                    '/photos/19.jpg',
-                    '/photos/20.jpg',
-                    '/photos/21.jpg',
+                    '/photos/15.jpg', '/photos/16.jpg', '/photos/17.jpg', '/photos/18.jpg',
+                    '/photos/19.jpg', '/photos/21.jpg',
+                    '/photos/15.jpg', '/photos/16.jpg', '/photos/17.jpg', '/photos/18.jpg',
+                    '/photos/19.jpg', '/photos/21.jpg',
                   ].map((src, idx) => (
                     <div key={`r3-${idx}`} className="photo-card glass-card">
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
