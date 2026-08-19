@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { X } from 'lucide-react';
 import {
   Sparkles,
   Film,
@@ -20,6 +21,7 @@ import { useGSAP3D } from '../hooks/useGSAP3D';
 export default function Home({ onNavigate, onBookSession }) {
   const { t } = useLanguage();
   const pageRef = useRef(null);
+  const [lightboxSrc, setLightboxSrc] = useState(null);
   useGSAP3D(pageRef);
 
   return (
@@ -111,8 +113,9 @@ export default function Home({ onNavigate, onBookSession }) {
                     '/photos/1.jpg', '/photos/2.jpg', '/photos/3.jpg', '/photos/4.jpg',
                     '/photos/5.jpg', '/photos/6.jpg', '/photos/7.jpg',
                   ].map((src, idx) => (
-                    <div key={`r1-${idx}`} className="photo-card glass-card">
+                    <div key={`r1-${idx}`} className="photo-card glass-card" onClick={() => setLightboxSrc(src)} style={{ cursor: 'pointer' }}>
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
+                      <div className="photo-card-zoom-hint">🔍</div>
                     </div>
                   ))}
                 </div>
@@ -125,8 +128,9 @@ export default function Home({ onNavigate, onBookSession }) {
                     '/photos/8.jpg', '/photos/9.jpg', '/photos/10.jpg', '/photos/11.jpg',
                     '/photos/12.jpg', '/photos/13.jpg', '/photos/14.jpg',
                   ].map((src, idx) => (
-                    <div key={`r2-${idx}`} className="photo-card glass-card">
+                    <div key={`r2-${idx}`} className="photo-card glass-card" onClick={() => setLightboxSrc(src)} style={{ cursor: 'pointer' }}>
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
+                      <div className="photo-card-zoom-hint">🔍</div>
                     </div>
                   ))}
                 </div>
@@ -139,8 +143,9 @@ export default function Home({ onNavigate, onBookSession }) {
                     '/photos/15.jpg', '/photos/16.jpg', '/photos/17.jpg', '/photos/18.jpg',
                     '/photos/19.jpg', '/photos/21.jpg',
                   ].map((src, idx) => (
-                    <div key={`r3-${idx}`} className="photo-card glass-card">
+                    <div key={`r3-${idx}`} className="photo-card glass-card" onClick={() => setLightboxSrc(src)} style={{ cursor: 'pointer' }}>
                       <img src={src} alt={`Baby photo ${idx + 1}`} className="photo-card-img" />
+                      <div className="photo-card-zoom-hint">🔍</div>
                     </div>
                   ))}
                 </div>
@@ -152,6 +157,18 @@ export default function Home({ onNavigate, onBookSession }) {
         </section>
 
       </div>
+
+      {/* ── Marquee Lightbox ── */}
+      {lightboxSrc && (
+        <div className="marquee-lightbox-backdrop" onClick={() => setLightboxSrc(null)}>
+          <button className="marquee-lightbox-close" onClick={() => setLightboxSrc(null)} aria-label="Close">
+            <X size={28} />
+          </button>
+          <div className="marquee-lightbox-content" onClick={e => e.stopPropagation()}>
+            <img src={lightboxSrc} alt="Enlarged" className="marquee-lightbox-img" />
+          </div>
+        </div>
+      )}
 
       <style>{`
         .home-page-root { position: relative; background: var(--bg-main); }
@@ -466,6 +483,73 @@ export default function Home({ onNavigate, onBookSession }) {
           .v1-content-layer { gap: 60px; padding: 40px 0 80px 0; }
           .v1-frame { padding: 24px 16px; }
           .photo-card { height: 180px; }
+        }
+
+        /* ── Photo Card Zoom Hint ── */
+        .photo-card { position: relative; }
+        .photo-card-zoom-hint {
+          position: absolute;
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%) scale(0);
+          font-size: 1.8rem;
+          opacity: 0;
+          transition: opacity 0.25s ease, transform 0.25s ease;
+          pointer-events: none;
+          filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+        }
+        .photo-card:hover .photo-card-zoom-hint {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* ── Marquee Lightbox ── */
+        .marquee-lightbox-backdrop {
+          position: fixed;
+          inset: 0;
+          z-index: 2000;
+          background: rgba(0, 0, 0, 0.92);
+          backdrop-filter: blur(16px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          animation: lbFadeIn 0.25s ease;
+        }
+        @keyframes lbFadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        .marquee-lightbox-close {
+          position: fixed;
+          top: 20px; right: 20px;
+          z-index: 2100;
+          width: 48px; height: 48px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.15);
+          border: 1px solid rgba(255,255,255,0.3);
+          color: #fff;
+          display: flex; align-items: center; justify-content: center;
+          cursor: pointer;
+          transition: background 0.2s ease;
+        }
+        .marquee-lightbox-close:hover { background: rgba(255,255,255,0.3); }
+        .marquee-lightbox-content {
+          max-width: 90vw;
+          max-height: 90vh;
+          animation: lbZoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes lbZoomIn {
+          from { transform: scale(0.8); opacity: 0; }
+          to   { transform: scale(1);   opacity: 1; }
+        }
+        .marquee-lightbox-img {
+          max-width: 90vw;
+          max-height: 90vh;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+          border-radius: 16px;
+          box-shadow: 0 30px 80px rgba(0,0,0,0.6);
         }
       `}</style>
     </div>
