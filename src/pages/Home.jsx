@@ -219,7 +219,7 @@ export default function Home({ onNavigate, onBookSession }) {
           flex-direction: column;
           gap: 180px;
           padding: 120px 0 0 0; /* removed bottom padding so footer is at the end */
-          background: linear-gradient(to bottom, transparent 0%, rgba(5,12,24,0.7) 30%, rgba(5,12,24,0.9) 100%);
+          background: transparent; /* Changed to fully transparent as requested so video shows clearly */
         }
 
         /* ── Hero ── */
@@ -500,7 +500,17 @@ export default function Home({ onNavigate, onBookSession }) {
           .pillars-grid { grid-template-columns: repeat(2, 1fr); }
           .experience-split { grid-template-columns: 1fr; }
           .experience-image-side { min-height: 300px; }
-          .v1-frames-container { grid-template-columns: repeat(2, 1fr); }
+          .v1-frames-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 20px;
+            gap: 16px;
+          }
+          .v1-frame {
+            min-width: 80vw;
+            scroll-snap-align: center;
+          }
         }
         @media (max-width: 768px) {
           .hero-section { min-height: 80vh; }
@@ -509,7 +519,6 @@ export default function Home({ onNavigate, onBookSession }) {
           .pillars-grid { grid-template-columns: 1fr; }
           .experience-text-side { padding: 24px 18px; }
           .cta-banner-card { padding: 40px 18px; }
-          .v1-frames-container { grid-template-columns: 1fr; gap: 24px; }
           .v1-content-layer { gap: 100px; padding: 60px 0 100px 0; }
         }
         @media (max-width: 480px) {

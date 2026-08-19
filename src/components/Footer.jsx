@@ -52,11 +52,9 @@ export default function Footer() {
 
       <style>{`
         .footer-section {
-          background: rgba(5, 12, 24, 0.35);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          background: transparent;
           color: rgba(255, 255, 255, 0.85);
-          padding: 60px 0 40px 0;
+          padding: 60px 0 100px 0; /* Add bottom padding so mobile bottom bar doesn't cover footer content */
           border-top: 1px solid rgba(255, 255, 255, 0.15);
           width: 100%;
         }
